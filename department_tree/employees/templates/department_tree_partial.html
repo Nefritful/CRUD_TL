@@ -1,0 +1,11 @@
+<ul>
+    {% for department in departments %}
+        <li class="list-group-item" data-toggle="collapse" href="#department-{{ department.id }}">{{ department.name }}</li>
+        <ul class="list-group collapse" id="department-{{ department.id }}">
+            {% for employee in department.employee_set.all %}
+                <li class="list-group-item">{{ employee.full_name }} ({{ employee.job_title }})</li>
+            {% endfor %}
+            {% include "department_tree_partial.html" with departments=department.department_set.all %}
+        </ul>
+    {% endfor %}
+</ul>
